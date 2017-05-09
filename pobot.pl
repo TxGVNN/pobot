@@ -5,6 +5,12 @@ use Getopt::Std;
 our $lang="en:vi";
 our $output="/dev/stdout";
 
+sub do_help{
+    print "Usage:\tpobot.pl -i <input-file> [-o output-file] [-l srclang:dstlang]\n";
+    print  "Ex:\tpobot.pl -l en:vi -i 01_the-debian-project.po -o 01_the-debian-project.po.vi";
+    exit 1
+}
+
 my %options=();
 getopts("i:o:l:", \%options);
 
@@ -12,7 +18,7 @@ if (defined $options{l}){
     $lang=$options{l};
 }
 if (!defined $options{i}){
-    die("Please select a input file");
+    do_help();
 }
 our $input = $options{i};
 
