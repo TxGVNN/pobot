@@ -12,7 +12,7 @@ if (defined $options{l}){
     $lang=$options{l};
 }
 if (!defined $options{i}){
-    die("Please select po file input");
+    die("Please select a input file");
 }
 our $input = $options{i};
 
@@ -21,13 +21,18 @@ if (defined $options{o}){
 }
 
 my $po = Locale::PO->load_file_asarray($input);
-my $intro = shift @$po;
+my $size=@$po;
 
+my $intro = shift @$po;
+my $count=1;
 foreach my $entry (@$po){
+    print "\rTranslate $count/$size";
+    $count++;
     my $msgid=$entry->msgid;
-    my $msgstr=`translate en:vi -b $msgid`;
+    my $msgstr=`translate $lang -b $msgid`;
     $entry->msgstr($msgstr);
 }
+print "\n";
 
 unshift @$po,$intro;
 Locale::PO->save_file_fromarray($output,$po);
