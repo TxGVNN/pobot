@@ -1,0 +1,60 @@
+# -*- mode: sh -*- 
+#!/bin/bash
+
+help(){
+    echo -e "Usage:\tpobot -i <input-file> [-o output-file] [-l srclang:dstlang]\n"
+    echo -e "Ex:\tpobot -l en:vi -i 01_the-debian-project.po -o 01_the-debian-project.po.vi"
+    exit
+}
+
+# Check translate shell
+bin="$(which trans)"
+
+if [ -z "$bin" ] ; then
+    bin="$(which translate)"
+fi
+if [ -z "$bin" ]; then
+    echo "Please install Translate Shell first (https://github.com/soimort/translate-shell)"
+    exit 1
+fi
+
+while getopts i:o:l: opt
+do
+    case "$opt" in
+	i) input="$OPTARG";;
+	o) output="$OPTARG";;
+	l) lang="$OPTARG";;
+	*) help;;
+    esac
+done
+
+if [ -z "$input" ]; then
+    help
+fi
+
+if [ -z "$output" ]; then
+    output="/dev/stdout"
+fi
+
+if [ -z "$lang" ]; then
+    lang="en:vi"
+fi
+
+truncate "$output" --size 0
+
+while read -r line
+do
+    if grep -q "msgid" <<< "$line"
+    then
+	id="${line##msgid}"
+	dest=$(translate en:vi -b "${id}")
+
+	echo "$line" >> "$output"
+	echo "msgstr ${dest}" >> "$output"
+    else
+	if ! grep -q "msgstr" <<< "$line"; then
+	    echo "$line" >> "$output"
+	fi
+    fi
+
+done < "$input"

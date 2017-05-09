@@ -1,0 +1,11 @@
+language: sh
+
+before_install:
+  - curl -Lso /tmp/shellcheck https://github.com/caarlos0/shellcheck-docker/releases/download/v0.4.6/shellcheck
+  - chmod +x /tmp/shellcheck
+
+script:
+ - /tmp/shellcheck -s bash gobot
+
+matrix:
+  fast_finish: true
