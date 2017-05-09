@@ -1,6 +1,7 @@
-# Pobot ![tool](https://img.shields.io/:tool-pobot-brightgreen.svg) [![Travis CI](https://travis-ci.org/Debian-VN/pobot.svg?branch=master)](https://travis-ci.org/Debian-VN/pobot)
-### What the hell is this?
-`pobot`: the simple tool was written by bash that helps to translate po file in the projects on Debian project.
+# Pobot ![tool](https://img.shields.io/:tool-pobot-blue.svg)
+`pobot`: The simple tool helps to translate po file in the projects on Debian project.
+
+*Please check by your eyes and use `msgfmt` to check again*
 
 ### How to install?
 - [Translate shell](https://github.com/soimort/translate-shell)
@@ -10,22 +11,30 @@
 
   Or: 
   
-  `wget https://raw.githubusercontent.com/Debian-VN/pobot/master/pobot -O /usr/bin/pobot`
+  `wget https://raw.githubusercontent.com/Debian-VN/pobot/master/pobot.pl -O /usr/bin/pobot.pl`
 
 ### How to use?
 
 ```
-Usage:  pobot -i <input-file> [-o output-file] [-l srclang:dstlang]
+Usage:  pobot.pl -i <input-file> [-o output-file] [-l srclang:dstlang]
 
 ```
 *Example*
 
 ```
-pobot -i 01_the-debian-project.po -o 01_the-debian-project.po.vi
+pobot.pl -i 01_the-debian-project.po -o 01_the-debian-project.po.vi
 ```
 
-### Notices
+### Changelog
 
+- v2
+```
+- Replace pobot (bash) to pobot.pl (written by Perl)
+- Process tag-xml before translate
+```
+
+- v1 (commit @b1ace84)
+```
 - Just tool to suggest to translate => Not done
-- Don't process <tag>
-- Please check by your eyes and use `msgfmt` tool to check again
+- Doesn't process tag-xml
+```

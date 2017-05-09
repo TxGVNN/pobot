@@ -1,4 +1,6 @@
 #!/usr/bin/perl
+#@author: Giap Tran <TxGVNN@gmail.com>
+
 use Locale::PO;
 use Getopt::Std;
 
