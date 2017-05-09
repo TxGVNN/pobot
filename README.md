@@ -4,8 +4,25 @@
 
 ### How to install?
 - [Translate shell](https://github.com/soimort/translate-shell)
+
   Please install `translate-shell`
 - Then, clone and run
+
+  Or: 
+  
+  `wget https://raw.githubusercontent.com/Debian-VN/pobot/master/pobot -O /usr/bin/pobot`
+
+### How to use?
+
+```
+Usage:  pobot -i <input-file> [-o output-file] [-l srclang:dstlang]
+
+```
+*Example*
+
+```
+pobot -i 01_the-debian-project.po -o 01_the-debian-project.po.vi
+```
 
 ### Notices
 

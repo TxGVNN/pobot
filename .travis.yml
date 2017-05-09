@@ -5,7 +5,7 @@ before_install:
   - chmod +x /tmp/shellcheck
 
 script:
- - /tmp/shellcheck -s bash gobot
+ - /tmp/shellcheck -s bash pobot
 
 matrix:
   fast_finish: true
