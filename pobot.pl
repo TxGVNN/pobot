@@ -45,7 +45,7 @@ foreach my $entry (@$po){
     my $source  = $msgid =~ s/<\/?.*?>/<###>/rg;
 
     # translate
-    my $msgstr=`translate $lang -b $source`;
+    my $msgstr=`trans $lang -b $source`;
 
     # pop <tag>
     for my $tag (@tags) {
