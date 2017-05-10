@@ -7,6 +7,9 @@
 - [Translate shell](https://github.com/soimort/translate-shell)
 
   Please install `translate-shell (>=0.9.6)`
+- Locale::PO Perl module
+
+  On Debian: `sudo apt-get install liblocale-po-perl`
 - Then, clone and run
 
   Or: 
