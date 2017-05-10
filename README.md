@@ -6,7 +6,7 @@
 ### How to install?
 - [Translate shell](https://github.com/soimort/translate-shell)
 
-  Please install `translate-shell`
+  Please install `translate-shell (>=0.9.6)`
 - Then, clone and run
 
   Or: 

@@ -49,7 +49,7 @@ foreach my $entry (@$po){
 
     # pop <tag>
     for my $tag (@tags) {
-	$msgstr = $msgstr =~ s/u003c###u003e/$tag/r;
+	$msgstr = $msgstr =~ s/<###>/$tag/r;
     }
 
     $entry->msgstr($msgstr);
