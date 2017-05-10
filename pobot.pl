@@ -1,4 +1,4 @@
-#!/usr/bin/perl
+#!/usr/bin/env perl
 #@author: Giap Tran <TxGVNN@gmail.com>
 
 use Locale::PO;
@@ -30,17 +30,30 @@ if (defined $options{o}){
 
 my $po = Locale::PO->load_file_asarray($input);
 my $size=@$po;
-
-my $intro = shift @$po;
 my $count=1;
+
 foreach my $entry (@$po){
     print "\rTranslate $count/$size";
     $count++;
     my $msgid=$entry->msgid;
-    my $msgstr=`translate $lang -b $msgid`;
+
+    # skip if msgid empty
+    if ( (not defined $msgid) || ($msgid eq '""') ) { next }
+
+    # push <tag>
+    my @tags = $msgid =~ /<\/?.*?>/g;
+    my $source  = $msgid =~ s/<\/?.*?>/<###>/rg;
+
+    # translate
+    my $msgstr=`translate $lang -b $source`;
+
+    # pop <tag>
+    for my $tag (@tags) {
+	$msgstr = $msgstr =~ s/u003c###u003e/$tag/r;
+    }
+
     $entry->msgstr($msgstr);
 }
-print "\n";
+print "::Done\n";
 
-unshift @$po,$intro;
 Locale::PO->save_file_fromarray($output,$po);
